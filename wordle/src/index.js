@@ -63,9 +63,15 @@ function clearBoard(){
     }
 }
 
-function checkIsCorrectAnswer(){
+function isGameFinished(){
     if(randomAnswer === currentAttempt){
         alert(randomAnswer);
+        initGrid();
+        return true;
+    }
+
+    if(attempts.length === ROW-1){
+        alert("you can`t find the correct answer");
         initGrid();
         return true;
     }
@@ -83,7 +89,12 @@ function onClickGridCell(e){
     // 엔터면 리셋시켜주는 코드 작성
     if(character === 'Enter' || e.keyCode === 13) {
         // 꽉 채우지 않고 엔터 누른경우 or 정답인경우.
-        if(currentAttempt.length !== COL || checkIsCorrectAnswer()) return; 
+        if(currentAttempt.length !== COL || isGameFinished()) return; 
+
+        if(!wordList.includes(currentAttempt)){
+            alert("answer is not in the wordList");
+            return;
+        }
     
         attempts.push(currentAttempt);
         currentAttempt = ''; 

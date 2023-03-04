@@ -82,17 +82,11 @@ function onClickGridCell(e){
     const character = e.key;
     // 엔터면 리셋시켜주는 코드 작성
     if(character === 'Enter' || e.keyCode === 13) {
-        // 꽉 채우지 않고 엔터 누른경우
-        if(currentAttempt.length !== COL) return; 
-        // 정답체크 먼저 하기
-        if(checkIsCorrectAnswer()){
-            return;
-        }
-
-        // 현재 시도를 저장하고 비운다
+        // 꽉 채우지 않고 엔터 누른경우 or 정답인경우.
+        if(currentAttempt.length !== COL || checkIsCorrectAnswer()) return; 
+    
         attempts.push(currentAttempt);
-        currentAttempt = '';
-
+        currentAttempt = ''; 
         updateGrid();
         return;
     }
@@ -103,7 +97,7 @@ function onClickGridCell(e){
         return;
     }
     // letter이 아니거나 6글자를 다 쓴 경우.
-    if(!isValidInput(character) || currentAttempt.length >= COL) return;
+    if(currentAttempt.length === COL || !isValidInput(character)) return;
     
     currentAttempt += character;
 

@@ -1,6 +1,12 @@
 const ROW = 6;
 const COL = 5;
 
+const keyboardLetters = [
+    ['q','w','e','r','t','y','u','i','o','p'],
+    ['a','s','d','f','g','h','j','k','l'],
+    ['Enter','z','x','c','v','b','n','m','bs'],
+    
+]
 const wordList = [
     'patio',
     'apple',
@@ -18,9 +24,15 @@ let attempts = []; // 시도할때마다 숫자가 참.
 let currentAttempt = '';
 
 const gridWrapper = document.getElementById('grid');
+const keyboardWrapper = document.getElementById('keyboard_wrapper');
 
-document.addEventListener('keyup',(e) => {
-    const char = onClickGridCell(e);
+document.addEventListener('keydown',(e) => {
+    console.log(e.metaKey, e.ctrlKey, e.altKey, e.shiftKey)
+    if(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey){ // keyup이면 어떻게 ㅎ결할지.
+        return;
+    }
+    const key = e.key;
+    const char = onClickGridCell(key);
     if(!char) return; 
 
     updateGrid();
@@ -30,6 +42,39 @@ document.addEventListener('keyup',(e) => {
  *  Make Wordle Grid (6 x 5)
  */
 initGrid();
+initKeyboard();
+
+function initKeyboard() {
+    for(let keyboardLetter of keyboardLetters) {
+        buildKeyboradRow(keyboardLetter)
+    }
+}
+
+function buildKeyboradRow(letters) {
+    const letterDivWrapper = document.createElement('div');
+
+    for(let letter of letters){
+        const letterDiv = document.createElement('div');
+        letterDiv.className = 'letter';
+        letterDiv.textContent = letter;
+        letterDivWrapper.appendChild(letterDiv);    
+
+        letterDivWrapper.addEventListener('click',(e) => {
+            if(e.target.className === 'letter') {
+                const key = e.target.innerHTML === 'bs' ? 'Backspace' : e.target.innerHTML;                
+
+                const char = onClickGridCell(key);
+                if(!char) return; 
+
+                updateGrid();
+            }
+        })
+    }
+
+    letterDivWrapper.style.display = 'flex'
+    letterDivWrapper.style.gap = '10px'
+    keyboardWrapper.appendChild(letterDivWrapper);
+}
 
 
 function initGlobalValue(){
@@ -84,10 +129,9 @@ function isValidInput(char){
     return /^[a-z]$/.test(char);
 }
 
-function onClickGridCell(e){
-    const character = e.key;
+function onClickGridCell(character){
     // 엔터면 리셋시켜주는 코드 작성
-    if(character === 'Enter' || e.keyCode === 13) {
+    if(character === 'Enter') {
         // 꽉 채우지 않고 엔터 누른경우 or 정답인경우.
         if(currentAttempt.length !== COL || isGameFinished()) return; 
 
@@ -102,7 +146,7 @@ function onClickGridCell(e){
         return;
     }
 
-    if(character === 'Backspace' || e.keyCode === 8) {
+    if(character === 'Backspace') {
         currentAttempt = currentAttempt.slice(0, currentAttempt.length - 1);
         updateGrid();
         return;

@@ -5,7 +5,6 @@ const keyboardLetters = [
     ['q','w','e','r','t','y','u','i','o','p'],
     ['a','s','d','f','g','h','j','k','l'],
     ['Enter','z','x','c','v','b','n','m','bs'],
-    
 ]
 const wordList = [
     'patio',
@@ -32,7 +31,7 @@ document.addEventListener('keydown',(e) => {
         return;
     }
     const key = e.key;
-    const char = onClickGridCell(key);
+    const char = handleKey(key);
     if(!char) return; 
 
     updateGrid();
@@ -57,19 +56,19 @@ function buildKeyboradRow(letters) {
         const letterDiv = document.createElement('div');
         letterDiv.className = 'letter';
         letterDiv.textContent = letter;
-        letterDivWrapper.appendChild(letterDiv);    
-
-        letterDivWrapper.addEventListener('click',(e) => {
-            if(e.target.className === 'letter') {
-                const key = e.target.innerHTML === 'bs' ? 'Backspace' : e.target.innerHTML;                
-
-                const char = onClickGridCell(key);
-                if(!char) return; 
-
-                updateGrid();
-            }
-        })
+        letterDivWrapper.appendChild(letterDiv);      
     }
+    
+    letterDivWrapper.addEventListener('click',(e) => {
+        if(e.target.className === 'letter') {
+            const key = e.target.innerHTML === 'bs' ? 'Backspace' : e.target.innerHTML;                
+
+            const char = handleKey(key);
+            if(!char) return; 
+
+            updateGrid();
+        }
+    })
 
     letterDivWrapper.style.display = 'flex'
     letterDivWrapper.style.gap = '10px'
@@ -129,8 +128,9 @@ function isValidInput(char){
     return /^[a-z]$/.test(char);
 }
 
-function onClickGridCell(character){
+function handleKey(character){
     // 엔터면 리셋시켜주는 코드 작성
+    console.log(character)
     if(character === 'Enter') {
         // 꽉 채우지 않고 엔터 누른경우 or 정답인경우.
         if(currentAttempt.length !== COL || isGameFinished()) return; 

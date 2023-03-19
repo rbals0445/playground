@@ -7,6 +7,10 @@
     <title>My Wordle</title>
 </head>
 <style>
+    :root {
+        --main-border-style: 1px solid gray;
+    }
+
     html,body {
         box-sizing: border-box;
         padding: 0px;
@@ -50,10 +54,28 @@
     .grid_item {
         width: 60px;
         height: 60px;
-        border : 1px solid gray;
+        border : var(--main-border-style);
         font-size: 30px;
         line-height: 60px;
         text-align: center;
+    }
+
+    .keyboard_wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        line-height: 60px;
+        gap: 10px;
+    }
+
+    .letter {
+        border: var(--main-border-style);
+        width : 60px;
+        height : 60px;
+        cursor: pointer;
+        background-color: grey;
+        font-weight: bold;
     }
     
     
@@ -63,6 +85,7 @@
     <main>
         <div class="grid" id="grid">
     </main>
+    <div class="keyboard_wrapper" id="keyboard_wrapper"></div>
 
     </div>
     <script src="./src/index.js"></script>

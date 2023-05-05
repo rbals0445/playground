@@ -38,7 +38,13 @@ function Gallery() {
             padding: "10px",
           }}
         >
-          <div>{elem.thumbnailUrl}</div>
+          <img
+            loading="lazy"
+            width="150px"
+            height="150px"
+            src={elem.thumbnailUrl}
+            alt=""
+          />
           <div>{elem.title}</div>
         </div>
       ))}

@@ -1,4 +1,5 @@
 import { IPhoto } from "../types/index";
+import { utils, writeFile } from "xlsx";
 
 interface IAlbumInfoTableProps {
   photoInfo: IPhoto[];
@@ -7,12 +8,16 @@ interface IAlbumInfoTableProps {
 const tableHeaders = ["albumId", "id", "title", "url", "thumbnailUrl"];
 
 function AlbumInfoTable({ photoInfo }: IAlbumInfoTableProps) {
+  const onClickExcelDownload = () => {
+    const wb = utils.book_new();
+    const ws = utils.json_to_sheet(photoInfo);
+    utils.book_append_sheet(wb, ws, "Sheet제목");
+    writeFile(wb, "myFirstExcel.xlsx");
+  };
+
   return (
     <>
-      <button
-        style={{ marginTop: "30px" }}
-        onClick={() => alert("Download Clicked")}
-      >
+      <button style={{ marginTop: "30px" }} onClick={onClickExcelDownload}>
         Download
       </button>
       {/* table info */}

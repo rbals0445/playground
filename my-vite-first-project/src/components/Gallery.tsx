@@ -1,22 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
 import { Navigation, Pagination, Autoplay } from "swiper";
-
 import { Swiper, SwiperSlide } from "swiper/react";
+import AlbumInfoTable from "./AlbumInfoTable";
+import { IPhoto } from "../types";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const photoUrl = "https://jsonplaceholder.typicode.com/photos";
-
-interface IPhoto {
-  albumId: number;
-  id: number;
-  title: string;
-  url: string;
-  thumbnailUrl: string;
-}
 
 function Gallery() {
   const [photoInfo, setPhotoInfo] = useState<IPhoto[] | undefined>();
@@ -65,6 +58,7 @@ function Gallery() {
           </SwiperSlide>
         ))}
       </Swiper>
+      {!!photoInfo?.length && <AlbumInfoTable photoInfo={photoInfo} />}
     </>
   );
 }

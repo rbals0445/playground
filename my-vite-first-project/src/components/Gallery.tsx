@@ -1,6 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import { Navigation, Pagination, Autoplay } from "swiper";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 const photoUrl = "https://jsonplaceholder.typicode.com/photos";
 
 interface IPhoto {
@@ -29,25 +36,35 @@ function Gallery() {
 
   return (
     <>
-      {photoInfo?.map((elem, index) => (
-        <div
-          key={index}
-          style={{
-            border: "1px solid blue",
-            margin: "20px",
-            padding: "10px",
-          }}
-        >
-          <img
-            loading="lazy"
-            width="150px"
-            height="150px"
-            src={elem.thumbnailUrl}
-            alt=""
-          />
-          <div>{elem.title}</div>
-        </div>
-      ))}
+      <div>Count: {photoInfo?.length}</div>
+      <Swiper
+        // install Swiper modules
+        modules={[Navigation, Pagination, Autoplay]}
+        pagination={{
+          dynamicBullets: true,
+          type: "fraction",
+        }}
+        autoplay={{ delay: 2000 }}
+        navigation
+        spaceBetween={50}
+        slidesPerView={2}
+        grabCursor
+      >
+        {photoInfo?.map((elem, index) => (
+          <SwiperSlide key={index}>
+            <div style={{ padding: "30px", border: "1px solid blue" }}>
+              <img
+                loading="lazy"
+                width="150px"
+                height="150px"
+                src={elem.thumbnailUrl}
+                alt=""
+              />
+              <div>{elem.title}</div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </>
   );
 }

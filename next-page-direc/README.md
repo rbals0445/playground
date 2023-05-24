@@ -71,6 +71,8 @@ export default function Page({
     - 전체 사이트를 다시 빌드하지 않고, 페이지 단위로 정적 생성 가능.
     - getStaticProps에서 리턴할때 revalidate 를 붙이면 됨. 몇초마다 재생성 이런거 가능.
     - stale page가 revalidate 될 동안 백그라운드에서 실행되고 새로운 페이지가 브라우저에게 serve 된다.
+  - 결론적으로 getStaticProps 미리 실행해서 그걸 prop으로 넘겨주는거임. 클라이언트 컴포넌트와는 관계가 없음. 
+  - getSTaticProps에서만 클라이언트 코드가 없으면 됨.
 
 - 빌드타임에 HTML파일도 만드는데 getStaticProps의 실행 결과를 가지고 있는 JSON 파일도 만든다. 이건 Next 내부적으로 page navigate할때 이 파일을 이용한다(next/link, router). 빌드타임에 pre-computed 해놓기 때문. page component의 props로 이용.
 - 즉 클라이언트 사이트 페이지 전환은 getStaticProps를 호출하지 않고, exported된 JSON 파일만 사용한다.

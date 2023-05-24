@@ -80,3 +80,10 @@ export default function Page({
 - SSR(ServerSideProps) vs SSG(getStaticProps)
   - 빌드타임에 데이터 fetch후에 변하지 않으면 SSG로 충분
   - 빌드타임 이후에 값이 변하니까 요청마다 Pre-render 하는것은? SSR (Cache-control로 캐시도 가능)
+
+- 모든걸 다 SSG로 한다면? (만약 가능하다고 하더라도) 빌드시간이 너무 길어진다
+- 모든걸 다 SSR로 한다면? (만약 가능하다고 하더라도) 옛날의 MPA 방식과 다른게 있나? 그리고 서버 비용도 더 많이 든다.
+  - 캐시를 물론 사용하겠지만, 매번 요청할때마다 바뀌는 html, data fetch 등등 작업이 많아진다.
+  - 기존 CSR은 빈 html페이지, 번들된 js파일로 알아서 쓲싹쓲싹 하기때문에 서버 비용이 훨씬 덜 들게 된다.
+
+- 개인정보 보여주는 대시보드나 SEO 필요없는데 굳이 SSR을 쓰면 굳이~ 내는 돈의 증가라고 보아도 된다.

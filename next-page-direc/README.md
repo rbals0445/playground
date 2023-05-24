@@ -4,7 +4,7 @@
 - Component prop은 현재 활성화중인 페이지이다. jsx를 바벨에서 트랜스파일 한 그 형태로 찍힘.
 - pageProps는 SSR, SSG를 통해서 preload 되는 프롭. default는 {}
   - 빌드타임에 api 미리 쏴서 prop에 담을 수 있으니 대박이긴 함..
-  - 빌드타임 이후에 api resp 변하면?.. 안됩니다.
+  - 빌드타임 이후에 api resp 변하면?.. 안됩니다. SSR을 이용해서 서버사이드에서 요청해도 되긴 함. pre-render의 필요성에 대해 고민
 
 ### [\_document.tsx](https://nextjs.org/docs/pages/building-your-application/routing/custom-document)
 

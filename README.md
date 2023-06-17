@@ -4,10 +4,14 @@
 
 
 ## 자주 쓰는 설정
-// npm install --save-dev --save-exact prettier
-// echo {}> .prettierrc.json
+``` bash
+# prettier
+$ npm install --save-dev --save-exact prettier
+$ echo {}> .prettierrc.json
+```
+
+``` js
 // .prettierrc.json
-```json
 {
   "printWidth": 80,
   "tabWidth": 2,
@@ -16,5 +20,4 @@
   "arrowParens": "always",
   "trailingComma": "es5"
 }
-
 ```

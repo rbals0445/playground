@@ -1,30 +1,23 @@
-debugger;
 function LikeButton() {
-  const [text, setText] = React.useState("");
+  const [data, setData] = React.useState([]);
 
-  const onClick = (e, test) => {
-    console.log(e, test);
-  };
+  const onClick = () => {
+    const arr = Array(10)
+      .fill(0)
+      .map((_) => Math.random().toString(36).slice(3, 8));
 
-  const onChange = (e) => {
-    console.log(e.target.value);
-    setText(e.target.value);
+    setData(arr);
   };
 
   return (
-    <ul>
-      <li onClick={onClick}>Item 1</li>
-      <input type="text" onChange={onChange} value={text} />
-      <label>
-        Choose an ice cream flavor:
-        <select class="ice-cream" name="ice-cream" onChange={onChange}>
-          <option value="">Select One …</option>
-          <option value="chocolate">Chocolate</option>
-          <option value="sardine">Sardine</option>
-          <option value="vanilla">Vanilla</option>
-        </select>
-      </label>
-    </ul>
+    <>
+      <button onClick={onClick}>random</button>
+      <ul>
+        {data.map((val, index) => (
+          <li key={index}>{val}</li>
+        ))}
+      </ul>
+    </>
   );
 }
 // onClick={(e) => onClick(e, 1, 2, 3, 4, 5, 6, 7)} 는 아래로 변환된다.
@@ -51,5 +44,3 @@ function LikeButtonWithoutDelegation() {
 // debugger;
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<LikeButton />);
-
-console.dir(LikeButton());

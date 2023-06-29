@@ -1,0 +1,13 @@
+{
+  "presets": [
+    "@babel/preset-react",
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage", // 실제 사용한 폴리필만 import하게끔.
+        "corejs": "3.6.5" // corejs 모듈 몇 버전을 사용할지?
+      }
+    ],
+    "@babel/preset-typescript"
+  ]
+}

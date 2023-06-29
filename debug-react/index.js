@@ -1,5 +1,12 @@
+import React, { useState } from "react";
+import { createRoot } from "react-dom/client";
+import getName from "./utils";
+import test from "./test";
+
 function LikeButton() {
-  const [data, setData] = React.useState([]);
+  const [data, setData] = useState([]);
+  const _test = test();
+  const name = getName(33);
 
   const onClick = () => {
     const arr = Array(10)
@@ -11,6 +18,8 @@ function LikeButton() {
 
   return (
     <>
+      <div>test={_test}</div>
+      <div>name={name}</div>
       <button onClick={onClick}>random</button>
       <ul>
         {data.map((val, index) => (
@@ -42,5 +51,5 @@ function LikeButtonWithoutDelegation() {
   );
 }
 // debugger;
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = createRoot(document.getElementById("root"));
 root.render(<LikeButton />);

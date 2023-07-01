@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "esModuleInterop": true,
     "outDir": "./dist/",
     "noImplicitAny": true,
     "module": "es6",
@@ -9,6 +10,11 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true, // export default 한걸 import 하는걸 허가 하는지
     "sourceMap": true,
-    "typeRoots": ["@types", "node_modules/@types"] // default ./node_modules/@types, ../node_modules/@types"
-  }
+    "typeRoots": ["@types", "node_modules/@types"], // default ./node_modules/@types, ../node_modules/@types"
+    // type file 만들지 여부 결정.
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "./dist"
+  },
+  "exclude": ["node_modules", "dist", "webpack"]
 }

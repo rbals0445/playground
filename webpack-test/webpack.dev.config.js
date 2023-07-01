@@ -9,6 +9,13 @@ module.exports = {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         loader: "babel-loader",
+        options: {
+          presets: [
+            ["@babel/preset-env", { targets: "defaults" }],
+            "@babel/preset-react",
+            "@babel/preset-typescript"// 무슨 역할 하는지 확인 필요
+          ]
+        },
       },
       { test: /\.css$/, use: "css-loader" },
       { test: /\.(ts|tsx)$/, use: "ts-loader" },
@@ -21,7 +28,6 @@ module.exports = {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
   },
-  target: "web",
   devServer: {
     server: "https",
     port: 9000,
@@ -29,7 +35,12 @@ module.exports = {
   },
 
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".tsx", ".ts", ".js", ".jsx"],
+    alias: {
+      // 모든 react파일들이 현재 디렉토리의 REact를 바라보게함. 외부 에디터 부를때 ..
+      react: path.resolve(__dirname, "node_modules", "react"),
+      // "react-dom": path.resolve(__dirname, "node_modules", "react-dom"),
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
+import { Counter } from "./src";
 import getName from "./utils";
 import test from "./test";
 
@@ -26,30 +27,10 @@ function LikeButton() {
           <li key={index}>{val}</li>
         ))}
       </ul>
+      <Counter />
     </>
   );
 }
-// onClick={(e) => onClick(e, 1, 2, 3, 4, 5, 6, 7)} 는 아래로 변환된다.
 
-// onClick(e) {
-//   return _onClick(e, 1, 2, 3, 4, 5, 6, 7);
-// }
-
-function LikeButtonWithoutDelegation() {
-  const onClick = (index) => () => {
-    console.log(index);
-  };
-
-  return (
-    <ul onClick={() => console.log("엣헴 버블링 성공")}>
-      {Array(15000).map((_, index) => (
-        <li onClick={onClick(index)} key={index}>
-          {index}
-        </li>
-      ))}
-    </ul>
-  );
-}
-// debugger;
 const root = createRoot(document.getElementById("root"));
 root.render(<LikeButton />);

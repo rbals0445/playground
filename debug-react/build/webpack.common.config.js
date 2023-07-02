@@ -4,6 +4,8 @@ const productionConfig = require("./webpack.config.js");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const commonConfig = {
+  // 같은 path에서 여러 chunk를 만들경우 hot-reload 에러가 생긴다.
+  //  https://github.com/webpack/webpack/issues/15988#issuecomment-1167231285
   entry: {
     main: "./index.js",
     utils: "./utils.ts",

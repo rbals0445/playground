@@ -5,8 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "http-server . --cors",
-    "build:prod": "webpack --config webpack.config.js",
-    "build:dev": "webpack serve --config webpack.dev.config.js"
+    "build:prod": "cross-env NODE_ENV=production webpack --config ./build/webpack.common.config.js",
+    "build:dev": "cross-env NODE_ENV=development webpack serve --config ./build/webpack.common.config.js"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +21,7 @@
     "@types/react-dom": "^18.2.6",
     "babel-loader": "^9.1.2",
     "core-js": "^3.31.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.8.1",
     "html-webpack-plugin": "^5.5.3",
     "http-server": "^14.1.1",

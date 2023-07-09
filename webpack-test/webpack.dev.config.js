@@ -38,7 +38,10 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js", ".jsx"],
     alias: {
       // 모든 react파일들이 현재 디렉토리의 REact를 바라보게함. 외부 에디터 부를때 ..
+      // "@": path.resolve(__dirname, "../debug-react"),
+      "#": path.resolve(__dirname, "./src"),
       react: path.resolve(__dirname, "node_modules", "react"),
+      "my-util/dist": path.resolve(__dirname, "../", "debug-react"),
       // "react-dom": path.resolve(__dirname, "node_modules", "react-dom"),
     },
   },

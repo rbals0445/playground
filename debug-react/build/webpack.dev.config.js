@@ -13,6 +13,11 @@ module.exports = {
     port: 8888,
     hot: true,
   },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "../"),
+    },
+  },
   // https://github.com/webpack/webpack/issues/15988#issuecomment-1167231285
   // 같은 페이지에 여러개의 entry를 사용할 수 없음.
   optimization: {

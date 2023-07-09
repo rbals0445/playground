@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
-import { Counter } from "./src";
+import { Counter } from "./src/components/Counter";
 import getName from "./utils";
 import test from "./test";
 

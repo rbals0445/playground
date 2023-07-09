@@ -7,7 +7,6 @@ function App(): React.ReactElement {
   const [count, setCount] = useState(0);
   const name = getName(3);
   const _test = test();
-  console.log(Counter);
 
   return (
     <React.Fragment>

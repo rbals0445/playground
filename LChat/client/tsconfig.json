@@ -13,7 +13,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@/components/*": ["./src/components/*"]
+      "@home/*": ["./src/home/*"],
+      "@chat/*": ["./src/chat/*"],
+      "@base/*": ["./src/base/*"]
     }
   }
 }

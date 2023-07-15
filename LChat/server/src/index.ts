@@ -1,17 +1,20 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import https from "https";
 import fs from "fs";
+import cors from "cors";
 
 function main() {
   const app = express();
-  const port = 9090;
-  const privateKey = fs.readFileSync("key.pem");
-  const certificate = fs.readFileSync("cert.pem");
+  const port = 443;
+  app.use(cors({ origin: "https://localhost:9000" }));
+
+  const privateKey = fs.readFileSync("private-key.pem");
+  const certificate = fs.readFileSync("certificate.pem");
   const credentials = { key: privateKey, cert: certificate };
 
-  app.get("/", (req, res, next) => {
+  app.get("/", (req: Request, res: Response, next: NextFunction) => {
     console.log("test");
-    res.send("Hello from express server");
+    res.status(200).json({ me: "world" });
   });
 
   https.createServer(credentials, app).listen(port, () => {

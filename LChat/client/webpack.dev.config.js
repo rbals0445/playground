@@ -10,8 +10,9 @@ module.exports = {
         exclude: /node_modules/,
         loader: "babel-loader",
       },
-      { test: /\.css$/, use: "css-loader" },
+      { test: /\.css$/, use: ["style-loader", "css-loader"] },
       { test: /\.(ts|tsx)$/, use: "ts-loader" },
+      { test: /\.(png|svg|jpg|jpeg|gif)$/i, use:'file-loader' },
     ],
   },
   mode: "development",
@@ -31,10 +32,11 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
     alias: {
-      "@": path.resolve(__dirname, "./src"),
-      "@home": path.resolve(__dirname, "./src/home"),
-      "@chat/*": path.resolve(__dirname, "./src/chat"),
-      "@base/*": path.resolve(__dirname, "./src/base"),
+      "@": path.resolve(__dirname, "src"),
+      "@home": path.resolve(__dirname, "src/home"),
+      "@chat": path.resolve(__dirname, "src/chat"),
+      "@base": path.resolve(__dirname, "src/base"),
+      "@assets": path.resolve(__dirname, "/assets"),
     },
   },
   plugins: [

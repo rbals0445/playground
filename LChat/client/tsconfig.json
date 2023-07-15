@@ -10,12 +10,13 @@
     "allowSyntheticDefaultImports": true, // export default 한걸 import 하는걸 허가 하는지
     "sourceMap": true,
     "typeRoots": ["@types", "node_modules/@types"], // default ./node_modules/@types, ../node_modules/@types
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"],
-      "@home/*": ["./src/home/*"],
-      "@chat/*": ["./src/chat/*"],
-      "@base/*": ["./src/base/*"]
+      "@/*": ["src/*"],
+      "@home/*": ["src/home/*"],
+      "@chat/*": ["src/chat/*"],
+      "@base/*": ["src/base/*"],
+      "@assets/*": ["assets/*"]
     }
   }
 }

@@ -14,20 +14,46 @@ function App(): React.ReactElement {
 
   return (
     <>
-      <div style={{ width: "100%", height: "65px", display: "flex" }}>
-        <img src={image} style={{ width: "80px" }}></img>
-        <div style={{ width: "100%" }}>
-          <div>황구273 / Gyumin Han</div>
-          <div>화이팅!!!!!</div>
+      <div
+        style={{
+          margin: "0 auto",
+          width: "360px",
+          background: "#fff",
+          height: "100vh",
+        }}
+      >
+        <div
+          style={{
+            width: "100%",
+            height: "105px",
+            display: "flex",
+            justifyContent: "center",
+            paddingTop: "40px",
+          }}
+        >
+          <img src={image} style={{ width: "80px" }}></img>
+          <div>
+            <div>황구273 / Gyumin Han</div>
+            <div>화이팅!!!!!</div>
+          </div>
         </div>
+        <h1 style={{ padding: "20px 0", textAlign: "center" }}>Room List</h1>
+        <hr />
+        <ul
+          style={{
+            marginTop: "20px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          {roomList.map((roomName) => (
+            <li key={roomName}>
+              <Link to="/chat">{roomName}</Link>
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul>
-        {roomList.map((roomName) => (
-          <li key={roomName}>
-            <Link to="/">{roomName}</Link>
-          </li>
-        ))}
-      </ul>
     </>
   );
 }

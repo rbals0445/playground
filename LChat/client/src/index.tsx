@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "@/home/component/App";
 import "../app.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ChatRoom from "@chat/pages/ChatRoom";
 
 function main() {
   const root = createRoot(document.querySelector("#app"));
@@ -11,6 +12,7 @@ function main() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/chat" element={<ChatRoom />}></Route>
       </Routes>
     </BrowserRouter>
   );

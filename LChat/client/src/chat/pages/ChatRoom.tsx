@@ -6,13 +6,10 @@ function ChatRoom(): React.ReactElement {
   const [isLoading, setIsLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [respMessage, setRespMessage] = useState<string[]>([]);
-  const { connect, disconnect, sendMessage } = useSocket();
+  const { connect, disconnect, sendMessage, receiveMessage } = useSocket();
 
   const onClickSend = (message: string) => () => {
-    sendMessage("e1", message, (resp: string) => {
-      setRespMessage((prev) => [...prev, resp]);
-    });
-
+    sendMessage("e1", message);
     setMessage("");
   };
 
@@ -23,6 +20,10 @@ function ChatRoom(): React.ReactElement {
   useEffect(() => {
     connect();
     setIsLoading(false);
+
+    receiveMessage("e1", (resp: string) => {
+      setRespMessage((prev) => [...prev, resp]);
+    });
 
     return () => {
       disconnect();

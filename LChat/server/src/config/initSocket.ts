@@ -10,15 +10,18 @@ function initSocket(server: Server) {
 
   io.on("connection", (socket) => {
     console.log("userConnected");
+    socket.join("naruto"); // socket을 naruto 채널에 구독
 
     socket.on("disconnect", () => {
       console.log("user Disconencted");
     });
+    console.log(socket.id);
 
     socket.on("e1", (msg, cb) => {
-      console.log(msg);
-      cb(`${msg} msg 좀 추가합니다`);
-      // io.emit("create-something", msg + "msg 좀 추가합니다"); // sender 포함.
+      // console.log(msg);
+      // cb("hello");
+      io.to("naruto").emit("e1", msg);
+      // io.emit("e1", "hello"); // sender 포함.
       // socket.broadcast.emit으로 발신자 제외하고 모두 보내기 가능
     });
   });

@@ -1,45 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import useSocket from "@chat/hooks/useSocket";
 import { socket } from "@/utils/socket";
-import { ConnectionState } from "@chat/component/ConnectionState";
-import { Events } from "@chat/component/Events";
-import { MyForm } from "@chat/component/MyForm";
-import { ConnectionManager } from "@chat/component/ConnectionManager";
 
 function ChatRoom(): React.ReactElement {
-  const [isConnected, setIsConnected] = useState(socket.connected);
-  const [fooEvents, setFooEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [message, setMessage] = useState("");
+  const [respMessage, setRespMessage] = useState<string[]>([]);
+  const { connect, disconnect, sendMessage } = useSocket();
+
+  const onClickSend = (message: string) => () => {
+    sendMessage("e1", message, (resp: string) => {
+      setRespMessage((prev) => [...prev, resp]);
+    });
+
+    setMessage("");
+  };
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
+  };
 
   useEffect(() => {
-    function onConnect() {
-      setIsConnected(true);
-    }
-
-    function onDisconnect() {
-      setIsConnected(false);
-    }
-
-    function onFooEvent(value: any) {
-      setFooEvents((previous) => [...previous, value]);
-    }
-
-    socket.on("connect", onConnect);
-    socket.on("disconnect", onDisconnect);
-    socket.on("foo", onFooEvent);
+    connect();
+    setIsLoading(false);
 
     return () => {
-      socket.off("connect", onConnect);
-      socket.off("disconnect", onDisconnect);
-      socket.off("foo", onFooEvent);
+      disconnect();
     };
   }, []);
 
+  if (isLoading) return <div>Loading...</div>;
+
   return (
-    <div className="App">
-      <ConnectionState isConnected={isConnected} />
-      <Events events={fooEvents} />
-      <ConnectionManager />
-      <MyForm />
-    </div>
+    <>
+      <div
+        style={{
+          display: "flex",
+          rowGap: "10px",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <input onChange={onChange} value={message} />
+        <button onClick={onClickSend(message)}>send Message</button>
+      </div>
+      <div>
+        {!!respMessage.length &&
+          respMessage.map((elem, index) => <div key={index}>{elem}</div>)}
+      </div>
+    </>
   );
 }
 

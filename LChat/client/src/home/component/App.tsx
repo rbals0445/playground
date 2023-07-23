@@ -5,7 +5,7 @@ import image from "@assets/profile.png";
 
 function App(): React.ReactElement {
   const [roomList, setRoomList] = useState(["나루토", "사스케", "가아라"]);
-
+  console.log("App");
   useEffect(() => {
     axiosInstance.get("/").then((res) => {
       console.log(res.data);
@@ -14,14 +14,7 @@ function App(): React.ReactElement {
 
   return (
     <>
-      <div
-        style={{
-          margin: "0 auto",
-          width: "360px",
-          background: "#fff",
-          height: "100vh",
-        }}
-      >
+      <div>
         <div
           style={{
             width: "100%",

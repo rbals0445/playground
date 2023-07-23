@@ -27,6 +27,7 @@ module.exports = {
     server: "https",
     port: 9000,
     hot: true,
+    historyApiFallback: true,
   },
 
   resolve: {

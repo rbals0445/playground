@@ -15,9 +15,10 @@ function initSocket(server: Server) {
       console.log("user Disconencted");
     });
 
-    socket.on("create-something", (msg) => {
-      console.log("message = ", msg);
-      io.emit("create-something", msg + "msg 좀 추가합니다"); // sender 포함.
+    socket.on("e1", (msg, cb) => {
+      console.log(msg);
+      cb(`${msg} msg 좀 추가합니다`);
+      // io.emit("create-something", msg + "msg 좀 추가합니다"); // sender 포함.
       // socket.broadcast.emit으로 발신자 제외하고 모두 보내기 가능
     });
   });
